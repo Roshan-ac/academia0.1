@@ -1,11 +1,9 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import profile from '../../assets/profile.jpg'
+import profile from '../assets/profile.jpg'
 import { sanityClient } from '../sanity'
 import { Post } from '@/typings'
 import Link from 'next/link'
-import Navbar from 'Components/Navbar'
-import Footer from 'Components/Footer'
 
 interface Props {
   posts: [Post]
@@ -21,7 +19,6 @@ export default function Home({ posts }: Props) {
         <meta name="author" content="Academia IMPACT!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar/>
       <main className={"h-full space-y-10 md:space-y-40"}>
         {/* Author about - Section goes here */}
         <div className=' md:flex justify-center md:mt-6'>
@@ -78,7 +75,6 @@ export default function Home({ posts }: Props) {
         </div>
 
       </main>
-      <Footer/>
     </>
   )
 }

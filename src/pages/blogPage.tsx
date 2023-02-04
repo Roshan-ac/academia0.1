@@ -1,16 +1,11 @@
-import Footer from 'Components/Footer'
-import Navbar from 'Components/Navbar'
+
 import React from 'react'
 
 const blogPage = () => {
   return (
-    <>
-    <Navbar/>
-    <div className='h-full'>
-      I am a blog page
-    </div>
-    <Footer/>
-    </>
+      <div className='h-full flex text-center p-96'>
+        I am a reach page
+      </div>
   )
 }
 
