@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import profile from '../../assets/profile.jpg'
-import { sanityClient } from '../../sanity'
+import { sanityClient } from '../sanity'
 import { Post } from 'typings'
 import dateFormat from 'dateformat'
 import { useRouter } from 'next/router'

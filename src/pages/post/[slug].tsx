@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import { sanityClient } from '../../../sanity'
-import {urlFor} from '../../../sanity'
+import { sanityClient } from '../../sanity'
+import {urlFor} from '../../sanity'
 import { Post } from '../../../typings'
 import { GetStaticProps } from 'next'
 
@@ -27,15 +27,15 @@ const Post = ({ posts }: Props) => {
   posts.body.map((data)=>{
     for (let i = 0; i < data.children[0].text.length; i++) {
       if(data.children[0].text[i]==1){
-        return(<>
+        return(<div key={data.children[0]._key}>
           <div className=' h-4'></div>
           <p>{data.children[0].text}</p>
-        </>
+        </div>
         )
       }
     }
     return(
-      <p>{data.children[0].text}</p>
+      <p key={data.children[0]._key}>{data.children[0].text}</p>
     )
   })
  }

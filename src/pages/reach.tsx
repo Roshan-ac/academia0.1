@@ -3,7 +3,7 @@ import React from 'react'
 const reach = () => {
   return (
     <div>
-      I'm a reach page
+      I am a reach page
     </div>
   )
 }
