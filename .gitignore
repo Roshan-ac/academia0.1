@@ -2,7 +2,6 @@
 
 # dependencies
 /node_modules
-sanity-academia
 /.pnp
 .pnp.js
 

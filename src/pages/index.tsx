@@ -3,8 +3,6 @@ import Image from 'next/image'
 import profile from '../../assets/profile.jpg'
 import { sanityClient } from '../sanity'
 import { Post } from 'typings'
-import dateFormat from 'dateformat'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 interface Props {
@@ -50,24 +48,24 @@ export default function Home({ posts }: Props) {
               {
                 posts.map((data) => {
                   return (
-                      <Link key={data._id} href={`/post/${data.slug.current}`}>
-                    <div  className="cursor-pointer shadow-md hover:text-gray-800 p-4 font rounded-lg md:flex items-center align-middle md:space-x-10 space-y-4 md:space-y-0">
-                      <div className='md:w-1/2 '>
-                        <p className=' whitespace-nowrap font-shibu tracking-normal text-md'>{data.title}</p>
-                      </div>
-                      <div className='flex md:justify-start justify-start md:w-1/2'>
-                        <div className=' md:ml-20'>
-                          <div className='flex justify-start space-x-4'>
-                            <span className=' bg-purple-500 w-1'></span>
-                            <p className=' text-sm  text-right'>{
-                              dateFormat(data.publishedAt, 'mmm dS yyyy')
-                            }</p>
-                            <p className=' text-sm '>{data.views}</p>
+                    <Link key={data._id} href={`/post/${data.slug.current}`}>
+                      <div className="cursor-pointer shadow-md hover:text-gray-800 p-4 font rounded-lg md:flex items-center align-middle md:space-x-10 space-y-4 md:space-y-0">
+                        <div className='md:w-1/2 '>
+                          <p className=' whitespace-nowrap font-shibu tracking-normal text-md'>{data.title}</p>
+                        </div>
+                        <div className='flex md:justify-start justify-start md:w-1/2'>
+                          <div className=' md:ml-20'>
+                            <div className='flex justify-start space-x-4'>
+                              <span className=' bg-purple-500 w-1'></span>
+                              <p className=' text-sm  text-right'>{
+                                data.publishedAt}
+                              </p>
+                              <p className=' text-sm '>{data.views}</p>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                            </Link>
+                    </Link>
                   )
                 })
               }
