@@ -15,6 +15,10 @@ export interface Post {
         };
     },
     discription: string;
-    mainImage:object
-    body: object;
+    mainImage:{
+        asset:{
+            _ref:string
+        }
+    }
+    body: Array;
 }

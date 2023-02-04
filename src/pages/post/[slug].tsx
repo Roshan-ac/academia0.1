@@ -10,21 +10,20 @@ interface Props {
   posts: [Post]
 }
 const Post = ({ posts }: Props) => {
-
   return (
     <main className=' h-screen  overflow-scroll'>
       <div className=' h-max md:p-4 items-center space-y-8'>
-        <img src={urlFor(posts.mainImage.asset._ref).url()!} alt={'image'} className={' w-full h-32 md:h-56 object-cover rounded-md shadow-xl shadow-zinc-700'} />
+        <img src={urlFor(posts[0].mainImage.asset._ref).url()!} alt={'image'} className={' w-full h-32 md:h-56 object-cover rounded-md shadow-xl shadow-zinc-700'} />
         <div className=' md:space-y-3 md:p-8 p-2 space-y-2'>
-          <h2 className=' font-shibu font-bold tracking-wider md:text-xl text-sm uppercase underline md:underline-offset-8 underline-offset-4'>{posts.title}</h2>
-          <h2 className=' font-sans  tracking-wide text-sm opacity-40 lowercase'>{posts.discription}</h2>
+          <h2 className=' font-shibu font-bold tracking-wider md:text-xl text-sm uppercase underline md:underline-offset-8 underline-offset-4'>{posts[0].title}</h2>
+          <h2 className=' font-sans  tracking-wide text-sm opacity-40 lowercase'>{posts[0].discription}</h2>
           <div className=' flex space-x-2 items-center'>
-            <img src={urlFor(posts.author.image.asset._ref).url()!} className='rounded-full h-10 w-10' alt='author' />
-            <h2 className=' text-center font-sans md:p-2 tracking-wide text-sm opacity-40 lowercase'>{posts.author.name}</h2>
+            <img src={urlFor(posts[0].author.image.asset._ref).url()!} className='rounded-full h-10 w-10' alt='author' />
+            <h2 className=' text-center font-sans md:p-2 tracking-wide text-sm opacity-40 lowercase'>{posts[0].author.name}</h2>
           </div>
           <div className=' text-sm text-itallic font-shibu p-2'>
            {
-              posts.body.map((data:any) => {
+              posts[0].body.map((data:any) => {
                 for (let i = 0; i < data.children[0].text.length; i++) {
                   if (data.children[0].text[i] == 1) {
                     return (<div key={data.children[0]._key}>
@@ -77,7 +76,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const query = `
-  *[_type == 'post' && slug.current== $slug][0]{
+  *[_type == 'post' && slug.current== $slug]{
     _id,
       title,
       discription,
