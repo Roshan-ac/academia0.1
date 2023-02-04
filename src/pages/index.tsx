@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import profile from '../../assets/profile.jpg'
 import { sanityClient } from '../sanity'
-import { Post } from 'typings'
+import { Post } from '@/typings'
 import Link from 'next/link'
 
 interface Props {
