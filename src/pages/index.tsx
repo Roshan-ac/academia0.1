@@ -5,10 +5,29 @@ import { sanityClient } from '../sanity'
 import { Post } from '@/typings'
 import Link from 'next/link'
 
+
+const shimmer = (w: number, h: number) => `
+<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="g">
+      <stop stop-color="#333" offset="20%" />
+      <stop stop-color="#222" offset="50%" />
+      <stop stop-color="#333" offset="70%" />
+    </linearGradient>
+  </defs>
+  <rect width="${w}" height="${h}" fill="#333" />
+  <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
+  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+</svg>`
+
 interface Props {
   posts: [Post]
 }
 export default function Home({ posts }: Props) {
+  const toBase64 = (str: string) =>
+  typeof window === 'undefined'
+    ? Buffer.from(str).toString('base64')
+    : window.btoa(str)
   return (
     <>
       <Head>
@@ -25,7 +44,8 @@ export default function Home({ posts }: Props) {
           <div className='py-3 space-y-5'>
             <div className=' flex justify-center'>
               <div style={{ 'position': 'relative', 'zIndex': '-1' }} className=' bg-slate-400 p-1 shadow-md rounded-full w-28'>
-                <Image className='rounded-full object-contain' src={profile} alt={''} />
+                <Image       placeholder="blur"
+      blurDataURL={`${profile},${toBase64(shimmer(700, 475))}`} className='rounded-full object-contain' src={profile} alt={''} />
               </div>
             </div>
             <div className='font-shibu p-3 text-center tracking-wide flex justify-center'>
@@ -38,7 +58,7 @@ export default function Home({ posts }: Props) {
 
         <div className=' h-1/2'>
           <div className=' md:flex justify-center'>
-            <div className=' p-5 shadow-2xl md:w-90 rounded-full'>
+            <div className=' p-3 md:p-5 shadow-2xl md:w-90 rounded-full'>
               <p className='  font-shibu font-bold text-lg'>Some Highlights</p>
             </div>
           </div>
@@ -49,9 +69,9 @@ export default function Home({ posts }: Props) {
                 posts.map((data) => {
                   return (
                     <Link key={data._id} href={`/post/${data.slug.current}`}>
-                      <div className="cursor-pointer shadow-md hover:text-gray-800 p-4 font rounded-lg md:flex items-center align-middle md:space-x-10 space-y-4 md:space-y-0">
+                      <div className="cursor-pointer shadow-md hover:text-gray-800 font rounded-lg md:flex items-center align-middle md:space-x-10 space-y-2 py-2 px-1 md:space-y-0">
                         <div className='md:w-1/2 '>
-                          <p className=' whitespace-nowrap font-shibu tracking-normal text-md'>{data.title}</p>
+                          <p className=' overflow-x-hidden whitespace-nowrap font-shibu tracking-normal text-md'>{data.title}</p>
                         </div>
                         <div className='flex md:justify-start justify-start md:w-1/2'>
                           <div className=' md:ml-20'>
@@ -101,3 +121,5 @@ export const getServerSideProps = async () => {
     props: { posts }
   }
 }
+
+
