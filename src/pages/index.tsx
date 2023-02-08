@@ -49,7 +49,7 @@ export default function Home({ posts }: Props) {
               </div>
             </div>
             <div className='font-shibu p-3 text-center tracking-wide flex justify-center'>
-              <p className=' font-semibold font-lg md:w-[900px]'> Myself Resham Acharya, a sociologist and technology enthusiast, delving into the impact of technology on society through this blog. Sharing unique perspectives on the intersection of sociology and technology. </p>
+              <p className=' font-semibold font-lg md:w-[900px]'> Myself Suyog Dev Khanal, a sociologist and technology enthusiast, delving into the impact of technology on society through this blog. Sharing unique perspectives on the intersection of sociology and technology. </p>
             </div>
           </div>
         </div>
