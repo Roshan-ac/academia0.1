@@ -4,6 +4,9 @@ import profile from '../assets/profile.jpg'
 import { sanityClient } from '../sanity'
 import { Post } from '@/typings'
 import Link from 'next/link'
+import DateFormatter from '@date-js/date-formatter'
+import { formatDistance, formatRelative, subDays } from 'date-fns'
+
 
 
 const shimmer = (w: number, h: number) => `
@@ -25,9 +28,9 @@ interface Props {
 }
 export default function Home({ posts }: Props) {
   const toBase64 = (str: string) =>
-  typeof window === 'undefined'
-    ? Buffer.from(str).toString('base64')
-    : window.btoa(str)
+    typeof window === 'undefined'
+      ? Buffer.from(str).toString('base64')
+      : window.btoa(str)
   return (
     <>
       <Head>
@@ -38,14 +41,14 @@ export default function Home({ posts }: Props) {
         <meta name="author" content="Academia IMPACT!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={"h-full space-y-10 md:space-y-40"}>
+      <main className={"h-max space-y-10 md:space-y-20 pt-20"}>
         {/* Author about - Section goes here */}
         <div className=' md:flex justify-center md:mt-6'>
           <div className='py-3 space-y-5'>
             <div className=' flex justify-center'>
               <div style={{ 'position': 'relative', 'zIndex': '-1' }} className=' bg-slate-400 p-1 shadow-md rounded-full w-28'>
-                <Image       placeholder="blur"
-      blurDataURL={`${profile},${toBase64(shimmer(700, 475))}`} className='rounded-full object-contain' src={profile} alt={''} />
+                <Image placeholder="blur"
+                  blurDataURL={`${profile},${toBase64(shimmer(700, 475))}`} className='rounded-full object-contain' src={profile} alt={''} />
               </div>
             </div>
             <div className='font-shibu p-3 text-center tracking-wide flex justify-center'>
@@ -56,31 +59,35 @@ export default function Home({ posts }: Props) {
 
         {/* Some highlight section goes here */}
 
-        <div className=' h-1/2'>
+        <div className=' h-1/2 px-5 md:py-6 py-3 space-y-2'>
           <div className=' md:flex justify-center'>
-            <div className=' p-3 md:p-5 shadow-2xl md:w-90 rounded-full'>
-              <p className='  font-shibu font-bold text-lg'>Some Highlights</p>
+            <div className=' p-2 md:p-5 shadow-2xl md:w-90'>
+              <p className='  font-shibu font-bold text-lg tracking-wider'>Some Highlights</p>
             </div>
           </div>
           {/* Higlight elements goes here */}
           <div className=' md:flex justify-center'>
-            <div className=' overflow-hidden rounded-md p-3 space-y-3 md:w-[800px]'>
+            <div className=' overflow-hidden rounded-md md:w-[800px] py-3'>
               {
-                posts.map((data) => {
+                posts.map((data,index) => {
+                if(index==4){
+                  return 
+                }
+                  
                   return (
                     <Link key={data._id} href={`/post/${data.slug.current}`}>
-                      <div className="cursor-pointer shadow-md hover:text-gray-800 font rounded-lg md:flex items-center align-middle md:space-x-10 space-y-2 py-2 px-1 md:space-y-0">
+                      <div className="cursor-pointer shadow-md  hover:text-gray-800 font rounded-lg md:flex items-center align-middle md:space-x-10 space-y-3 p-2 py-5 md:space-y-0">
                         <div className='md:w-1/2 '>
-                          <p className=' overflow-x-hidden whitespace-nowrap font-shibu tracking-normal text-md'>{data.title}</p>
+                          <p className='truncate hover:text-clip w-80 md:w-60 overflow-hidden whitespace-nowrap font-shibu tracking-normal text-sm md:text-md'>{data.title}</p>
                         </div>
                         <div className='flex md:justify-start justify-start md:w-1/2'>
                           <div className=' md:ml-20'>
                             <div className='flex justify-start space-x-4'>
                               <span className=' bg-purple-500 w-1'></span>
-                              <p className=' text-sm  text-right'>{
-                                data.publishedAt}
+                              <p className=' text-xs font-shibu font-bold tracking-normal text-left w-40 '>
+                                {formatDistance(subDays(new Date(), 3), new Date(data.publishedAt))}
                               </p>
-                              <p className=' text-sm '>{data.views}</p>
+                              <p className=' text-xs font-shibu font-bold tracking-normal text-left w-40 uppercase'>{data.views}</p>
                             </div>
                           </div>
                         </div>

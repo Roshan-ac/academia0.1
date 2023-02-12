@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="bg-[#0C0C0F] px-5 py-2 space-y-5 mt-8 md:mt-0 relative bottom-0">
+        <footer className="bg-[#0C0C0F] px-5 py-2 space-y-5 mt-8 md:mt-0">
             <div className="p-4 space-y-6 md:flex justify-between md:p-5">
                 <div className=" text-white font-rosh tracking-widest text-lg space-y-2">
                     <p>Academia</p>

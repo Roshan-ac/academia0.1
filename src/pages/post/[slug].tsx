@@ -30,12 +30,13 @@ interface Props {
   posts: [Post]
 }
 const Post = ({ posts }: Props) => {
+   
     const toBase64 = (str: string) =>
     typeof window === 'undefined'
       ? Buffer.from(str).toString('base64')
       : window.btoa(str)
   return (
-    <main className=' h-screen  overflow-scroll'>
+    <main className=' h-screen  overflow-scroll py-16 md:py-20'>
       <div className=' h-max md:py-1 items-center space-y-1'>
         <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} src={urlFor(posts[0].mainImage.asset._ref).url()!} alt={'image'} className={' w-full h-32 md:h-30 object-cover'} objectFit={"contain"} height={1000} width={1000} />
         <div className=' md:space-y-3 md:p-4 p-2 space-y-2'>
@@ -63,6 +64,18 @@ const Post = ({ posts }: Props) => {
               />
             </article>
             <hr className=' py-2 mt-10'/>
+
+<div>
+  <div className=' p-1 font-shibu text-lg'><p>Recent comment</p></div>
+  <div className=' list-none p-1 py-2 space-y-2 font-shibu'>
+    <li>Roshan: This blog was awesome</li>
+    <li>author: Thank you so much</li>
+    <li>Roshan: This blog was awesome</li>
+    <li>Roshan: This blog was awesome</li>
+  </div>
+</div>
+
+
             <form className='p-1 mt-2 space-y-2'>
               <div className=''>
                 <h3 className='font-shibu tracking-wide text-lg'>Leave your comment below !</h3>
@@ -70,7 +83,7 @@ const Post = ({ posts }: Props) => {
               </div>
               <div className=' p-1'>
                 <label className=' space-y-1'>
-                  <h4 className='my-2 font-shibu tracking-wide opacity-50'>Name</h4>
+                  <h4 className='my-2 font-shibu tracking-wide opacity-50 '>Name</h4>
                   <input className=' font-shibu tracking-wide text-[16px] pl-2 py-1 rounded w-full text-black outline-none ring-2 ring-yellow-50' placeholder='Enter your name' name='Name' />
                 </label>
                 <label className=' space-y-1'>

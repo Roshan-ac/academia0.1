@@ -15,6 +15,7 @@ export interface Post {
         };
     },
     discription: string;
+    defination:string;
     mainImage:{
         asset:{
             _ref:string
