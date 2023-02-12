@@ -71,9 +71,8 @@ export default function Home({ posts }: Props) {
 
           {
             posts.map((data) => {
-              console.log(data.body[0])
               return (
-                <div className=' bg-gradient-to-tr from-red-300 to-black mx-2 h-52 relative rounded-r-full space-x-1'>
+                <div key={data._id} className=' bg-gradient-to-tr from-red-300 to-black mx-2 h-52 relative rounded-r-full space-x-1'>
                   <div className=' h-full bg-indigo-700 w-[10px]'></div>
                   <Image src={urlFor(data.mainImage).url()!} height={1000} width={100} alt={''} className="blur-[2px] w-full h-52 object-cover absolute top-0 left-1 opacity-50 drop-shadow-2xl" />
                   <div className=' absolute md:top-3 top-0 md:px-6 space-y-2 md:space-y-0 h-56'>
